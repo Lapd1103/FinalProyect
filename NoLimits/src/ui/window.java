@@ -99,7 +99,7 @@ public class window extends JFrame {
 		PStart.add(btnGLvls);
 
 		// Aventura --> Inicio
-		JLabel lblBackA = new JLabel("New label");
+		JLabel lblBackA = new JLabel();
 		lblBackA.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -112,16 +112,16 @@ public class window extends JFrame {
 		PLvls.add(lblBackA);
 		
 		// Aventura -->Nivel
-
+		
 		// Nivel --> Aventura
-
+		
+		
 		/**
 		 * Inicializacion de las pestañas
 		 */
 		initializePStart(PStart);
-		initializePLvls(PLvls);
-		
-
+		initializePLvls(PLvls, PLvl);
+		//initializePLvl(PLvl);
 	}
 
 	private void initializePStart(JPanel PStart) {
@@ -133,17 +133,39 @@ public class window extends JFrame {
 		PStart.add(lblFondo);
 	}
 
-	private void initializePLvls(JPanel PLvls) {
+	private void initializePLvls(JPanel PLvls, JPanel PLvl) {
 		
 		ArrayList<Level> levels = Load.initLvls();
 		
-		Load.loadIconsLvls(PLvls, levels);
+		Load.loadIconsLvls(PLvls, PLvl, levels);
 		
 		JLabel lblFondo = new JLabel("");
 		lblFondo.setIcon(Load.loadImg("/backgrounds/w_levels.jpg"));
 		lblFondo.setBounds(0, -20, widht, height);
 		PLvls.add(lblFondo);
 
+	}
+		
+	public static void initializePlvl(JPanel PLvls, JPanel PLvl, ImageIcon bg) {
+		PLvl.removeAll();
+		PLvl.repaint();
+		
+		JLabel lblBackN = new JLabel();
+		lblBackN.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PLvl.setVisible(false);
+				PLvls.setVisible(true);
+			}
+		});
+		lblBackN.setIcon(new ImageIcon(window.class.getResource("/sources/icons/arrow.png")));
+		lblBackN.setBounds(30, 35, 61, 64);
+		PLvl.add(lblBackN);
+		
+		JLabel lblFondo = new JLabel("");
+		lblFondo.setIcon(bg);
+		lblFondo.setBounds(0, -20, 1366, 728);
+		PLvl.add(lblFondo);
 	}
 	
 }

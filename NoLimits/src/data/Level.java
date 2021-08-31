@@ -10,28 +10,30 @@ import javax.swing.JPanel;
 
 import logic.GameEngine;
 import logic.Load;
+import ui.window;
 
 public class Level {
 	private int id;
+	private ImageIcon bg;
 	private ImageIcon iconE;
 	private ImageIcon iconD;
 	private Enemie enemie;
 	private ArrayList<Question> questions;
 	
-	public void showIconE(JPanel PLvls, int posX, int posY) {
+	public void showIconE(JPanel PLvls, JPanel PLvl, int posX, int posY) {
 		JLabel lblButton = new JLabel("");
 		lblButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				PLvls.setVisible(false);
+				PLvl.setVisible(true);
+				openLvl(PLvls, PLvl);
 			}
 		});
 		lblButton.setIcon(this.iconE);
 		lblButton.setBounds(posX, posY,  128, 86);
 		PLvls.add(lblButton);
 	}
-	
-	
 	
 	public void showIconD(JPanel PLvls, int posX, int posY) {
 		JLabel lblButton = new JLabel("");
@@ -40,17 +42,24 @@ public class Level {
 		PLvls.add(lblButton);
 	}
 	
+	
+	public void openLvl(JPanel PLvls, JPanel PLvl) {
+		System.out.println("Abriendo nivel "+this.id);
+		window.initializePlvl(PLvls, PLvl, this.getBg());
+	}
+	
 	//------Constructors------
-	public Level(int id, Enemie enemie, ArrayList<Question> questions) {
+	public Level(int id, ImageIcon bg, Enemie enemie, ArrayList<Question> questions) {
 		this.id = id;
+		this.bg = bg;
 		this.iconE = Load.loadImg("/icons/lvlE.png");
 		this.iconD = Load.loadImg("/icons/lvlD.png");
 		this.enemie = enemie;
 		this.questions = questions;
 	}
 	
-	public Level(int id) {
-		this(id, null, null);
+	public Level(int id, ImageIcon bg) {
+		this(id, bg, null, null);
 	}
 	
 	//-----Getters and Setters-----
@@ -60,6 +69,14 @@ public class Level {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public ImageIcon getBg() {
+		return bg;
+	}
+
+	public void setBg(ImageIcon bg) {
+		this.bg = bg;
 	}
 
 	public ImageIcon getIconE() {
