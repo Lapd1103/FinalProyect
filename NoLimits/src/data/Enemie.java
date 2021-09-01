@@ -4,14 +4,18 @@ import javax.swing.ImageIcon;
 
 public class Enemie {
 	private int id;
-	private ImageIcon img;
 	private int life;
-
+	private ImageIcon img;
+	private int posX;
+	private int posY;
+	
 	//-----Constructor-----
-	public Enemie(int id, ImageIcon img, int life) {
+	public Enemie(int id, int life, ImageIcon img, int posX, int posY) {
 		this.id = id;
-		this.img = img;
 		this.life = life;
+		this.img = img;
+		this.posX = posX;
+		this.posY = posY;
 	}
 	
 	//-----Getters and Setters-----
@@ -22,7 +26,15 @@ public class Enemie {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public int getLife() {
+		return life;
+	}
 
+	public void setLife(int life) {
+		this.life = life;
+	}
+	
 	public ImageIcon getImg() {
 		return img;
 	}
@@ -31,11 +43,21 @@ public class Enemie {
 		this.img = img;
 	}
 
-	public int getLife() {
-		return life;
+	public int getPosX() {
+		return posX;
 	}
 
-	public void setLife(int life) {
-		this.life = life;
+	public void setPosX(int posX) {
+		this.posX = posX;
 	}
+
+	public int getPosY() {
+		return posY;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+	
+	
 }

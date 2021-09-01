@@ -9,7 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import data.Enemie;
 import data.Level;
+import data.Player;
 import logic.GameEngine;
 import logic.Load;
 
@@ -146,7 +148,7 @@ public class window extends JFrame {
 
 	}
 		
-	public static void initializePlvl(JPanel PLvls, JPanel PLvl, ImageIcon bg, int id) {
+	public static void initializePlvl(JPanel PLvls, JPanel PLvl, ImageIcon bg, Enemie enemie) {
 		PLvl.removeAll();
 		PLvl.repaint();
 		
@@ -162,20 +164,46 @@ public class window extends JFrame {
 		lblBackN.setBounds(30, 35, 61, 64);
 		PLvl.add(lblBackN);
 		
+		Player player = Load.initPlayer();
 		JLabel lblPlayer = new JLabel("");
-		lblPlayer.setIcon(new ImageIcon(window.class.getResource("/sources/player/player.gif")));
-		lblPlayer.setBounds(300, 0, 800, 800);
+		lblPlayer.setIcon(player.getImg());
+		lblPlayer.setBounds(300, 300, player.getImg().getIconWidth(), player.getImg().getIconHeight());
 		PLvl.add(lblPlayer);
+		showLife(PLvl, player.getLife(), 400, 300);
 		
 		JLabel lblEnemie = new JLabel("");
-		lblEnemie.setIcon(new ImageIcon(window.class.getResource("/sources/enemies/"+id+".gif")));
-		lblEnemie.setBounds(800, 0, 800, 800);
+		lblEnemie.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int liveA = enemie.getLife();
+				enemie.setLife(liveA-20);
+				initializePlvl(PLvls, PLvl, bg, enemie);
+				
+			}
+		});
+		lblEnemie.setIcon(enemie.getImg());
+		lblEnemie.setBounds(enemie.getPosX(), enemie.getPosY(), enemie.getImg().getIconWidth(), enemie.getImg().getIconHeight());
 		PLvl.add(lblEnemie);
+		showLife(PLvl, enemie.getLife(), enemie.getPosX()+(enemie.getImg().getIconWidth()/2), enemie.getPosY());
 		
 		JLabel lblFondo = new JLabel("");
 		lblFondo.setIcon(bg);
 		lblFondo.setBounds(0, -20, 1366, 728);
 		PLvl.add(lblFondo);
+	}
+	
+	private static void showLife(JPanel panel, int life, int posX, int posY) {
+	
+		JLabel lblLife = new JLabel();
+		lblLife.setBackground(Color.GRAY);
+		lblLife.setBounds(posX-140, posY-60, life, 30);
+		lblLife.setOpaque(true);
+		panel.add(lblLife);
+		
+		JLabel cLife = new JLabel();
+		cLife.setIcon(Load.loadImg("/icons/life.png"));
+		cLife.setBounds(posX-150, posY-90, 330, 70);
+		panel.add(cLife);
 	}
 	
 }

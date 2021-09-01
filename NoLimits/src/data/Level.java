@@ -44,7 +44,7 @@ public class Level {
 	
 	
 	public void openLvl(JPanel PLvls, JPanel PLvl) {
-		window.initializePlvl(PLvls, PLvl, this.getBg(), this.id);
+		window.initializePlvl(PLvls, PLvl, this.getBg(), this.getEnemie());
 	}
 	
 	//------Constructors------
@@ -55,6 +55,10 @@ public class Level {
 		this.iconD = Load.loadImg("/icons/lvlD.png");
 		this.enemie = enemie;
 		this.questions = questions;
+	}
+	
+	public Level(int id, ImageIcon bg, Enemie enemie) {
+		this(id, bg, enemie, null);
 	}
 	
 	public Level(int id, ImageIcon bg) {
