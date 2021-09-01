@@ -162,6 +162,11 @@ public class window extends JFrame {
 		lblBackN.setBounds(30, 35, 61, 64);
 		PLvl.add(lblBackN);
 		
+		JLabel lblPlayer = new JLabel("");
+		lblPlayer.setIcon(new ImageIcon(window.class.getResource("/sources/player/player.gif")));
+		lblPlayer.setBounds(300, 0, 800, 800);
+		PLvl.add(lblPlayer);
+		
 		JLabel lblEnemie = new JLabel("");
 		lblEnemie.setIcon(new ImageIcon(window.class.getResource("/sources/enemies/"+id+".gif")));
 		lblEnemie.setBounds(800, 0, 800, 800);
