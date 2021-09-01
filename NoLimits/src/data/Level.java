@@ -44,8 +44,7 @@ public class Level {
 	
 	
 	public void openLvl(JPanel PLvls, JPanel PLvl) {
-		System.out.println("Abriendo nivel "+this.id);
-		window.initializePlvl(PLvls, PLvl, this.getBg());
+		window.initializePlvl(PLvls, PLvl, this.getBg(), this.id);
 	}
 	
 	//------Constructors------

@@ -146,7 +146,7 @@ public class window extends JFrame {
 
 	}
 		
-	public static void initializePlvl(JPanel PLvls, JPanel PLvl, ImageIcon bg) {
+	public static void initializePlvl(JPanel PLvls, JPanel PLvl, ImageIcon bg, int id) {
 		PLvl.removeAll();
 		PLvl.repaint();
 		
@@ -161,6 +161,11 @@ public class window extends JFrame {
 		lblBackN.setIcon(new ImageIcon(window.class.getResource("/sources/icons/arrow.png")));
 		lblBackN.setBounds(30, 35, 61, 64);
 		PLvl.add(lblBackN);
+		
+		JLabel lblEnemie = new JLabel("");
+		lblEnemie.setIcon(new ImageIcon(window.class.getResource("/sources/enemies/"+id+".gif")));
+		lblEnemie.setBounds(800, 0, 800, 800);
+		PLvl.add(lblEnemie);
 		
 		JLabel lblFondo = new JLabel("");
 		lblFondo.setIcon(bg);
