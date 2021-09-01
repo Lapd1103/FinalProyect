@@ -27,5 +27,4 @@ public abstract class Question {
 	public void setLevel(int level) {
 		this.level = level;
 	}
-	
 }

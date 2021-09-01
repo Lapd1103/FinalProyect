@@ -18,6 +18,7 @@ public class Level {
 	private ImageIcon iconE;
 	private ImageIcon iconD;
 	private Enemie enemie;
+	private Player player;
 	private ArrayList<Question> questions;
 	
 	public void showIconE(JPanel PLvls, JPanel PLvl, int posX, int posY) {
@@ -44,21 +45,22 @@ public class Level {
 	
 	
 	public void openLvl(JPanel PLvls, JPanel PLvl) {
-		window.initializePlvl(PLvls, PLvl, this.getBg(), this.getEnemie());
+		window.initializePlvl(PLvls, PLvl, this.getBg(), this.getEnemie(), this.getPlayer());
 	}
 	
 	//------Constructors------
-	public Level(int id, ImageIcon bg, Enemie enemie, ArrayList<Question> questions) {
+	public Level(int id, ImageIcon bg, Enemie enemie,Player player, ArrayList<Question> questions) {
 		this.id = id;
 		this.bg = bg;
 		this.iconE = Load.loadImg("/icons/lvlE.png");
 		this.iconD = Load.loadImg("/icons/lvlD.png");
 		this.enemie = enemie;
+		this.player = player;
 		this.questions = questions;
 	}
 	
-	public Level(int id, ImageIcon bg, Enemie enemie) {
-		this(id, bg, enemie, null);
+	public Level(int id, ImageIcon bg, Enemie enemie, Player player) {
+		this(id, bg, enemie, player, null);
 	}
 	
 	public Level(int id, ImageIcon bg) {
@@ -104,6 +106,14 @@ public class Level {
 
 	public void setEnemie(Enemie enemie) {
 		this.enemie = enemie;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
 	public ArrayList<Question> getQuestions() {

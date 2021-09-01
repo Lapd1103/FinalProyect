@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import data.Enemie;
 import data.Level;
 import data.Player;
+import data.TQuestion;
 import logic.GameEngine;
 import logic.Load;
 
@@ -35,7 +36,11 @@ public class window extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		
+		ArrayList<TQuestion> questions = Load.initTQuestions(1); 
+		questions.forEach(System.out::println);
+		
+		/*EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					window frame = new window();
@@ -44,7 +49,7 @@ public class window extends JFrame {
 					e.printStackTrace();
 				}
 			}
-		});
+		});*/
 	}
 
 	/**
@@ -148,7 +153,7 @@ public class window extends JFrame {
 
 	}
 		
-	public static void initializePlvl(JPanel PLvls, JPanel PLvl, ImageIcon bg, Enemie enemie) {
+	public static void initializePlvl(JPanel PLvls, JPanel PLvl, ImageIcon bg, Enemie enemie, Player player) {
 		PLvl.removeAll();
 		PLvl.repaint();
 		
@@ -164,7 +169,7 @@ public class window extends JFrame {
 		lblBackN.setBounds(30, 35, 61, 64);
 		PLvl.add(lblBackN);
 		
-		Player player = Load.initPlayer();
+		
 		JLabel lblPlayer = new JLabel("");
 		lblPlayer.setIcon(player.getImg());
 		lblPlayer.setBounds(300, 300, player.getImg().getIconWidth(), player.getImg().getIconHeight());
@@ -177,7 +182,7 @@ public class window extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int liveA = enemie.getLife();
 				enemie.setLife(liveA-20);
-				initializePlvl(PLvls, PLvl, bg, enemie);
+				initializePlvl(PLvls, PLvl, bg, enemie, player);
 				
 			}
 		});

@@ -27,5 +27,10 @@ public class Option {
 		this.text = text;
 	}
 	
+	//-----toString-----
+	@Override
+	public String toString() {
+		return "Opcion "+this.id+": "+this.text;
+	}
 	
 }

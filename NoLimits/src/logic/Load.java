@@ -1,13 +1,20 @@
 package logic;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import data.CQuestion;
 import data.Enemie;
 import data.Level;
+import data.Option;
 import data.Player;
+import data.Question;
+import data.TQuestion;
 import ui.window;
 
 public abstract class Load {
@@ -15,21 +22,77 @@ public abstract class Load {
 	public static ArrayList<Level> initLvls(){
 		//Cargar enemigos
 		ArrayList<Enemie> enemies = initEnemies();
+		//Cargar jugador
+		Player player = initPlayer();
 		
-		// Cargan las imagenes de los fondos de los niveles
-		ArrayList<ImageIcon> bgs = new ArrayList<ImageIcon>(); 
-		for(int i =1; i<=9; i++) {
-			ImageIcon bg = loadImg("/backgrounds/levels/"+i+".jpg");
-			bgs.add(bg);
-		}
-		
-		//Instancian los niveles
+		//Instancia de los niveles
 		ArrayList<Level> levels = new ArrayList<Level>();
 		for(int i= 1; i<=9; i++) {
-			Level level = new Level(i, bgs.get(i-1), enemies.get(i-1));
+			//cargar preguntas
+			//ArrayList<Question> questions = initQuestions(i);
+			
+			// Cargan las imagenes de los fondos de los niveles
+			ImageIcon bg = loadImg("/backgrounds/levels/"+i+".jpg");
+			
+			//Instancia del nivel
+			Level level = new Level(i, bg, enemies.get(i-1), player);
 			levels.add(level);
 		}
 		return levels;
+	}
+	
+	/*public static ArrayList<Question> initQuestions(int lvl) {
+		//Cargar preguntas teoricas
+		ArrayList<TQuestion> TQuestions = initTQuestions(lvl);
+	
+	}*/
+
+	public static ArrayList<CQuestion> initCQuestion(int lvl){
+		ArrayList<CQuestion> cQuestions = new ArrayList<CQuestion>();
+		//Respuestas de preguntas teoricas
+		String ask[][] = {{"R11","R12"},{"R21","R22"},{"R31","R32"},{"R41","R42"},{"R51","R52"},{"R61","R62"},{"R71","R72"},{"R81","R82"},{"R91","R92"}};
+		
+		for(int i = 1; i<=2; i++) {
+			CQuestion cquest = new CQuestion(i, lvl, loadImg("/questions/C/"+lvl+i+".png"), ask[lvl-1][i-1]);
+			cQuestions.add(cquest);
+		}
+		return cQuestions;
+	}
+	
+	public static ArrayList<TQuestion> initTQuestions(int lvl){
+		ArrayList<TQuestion> tQuestions = new ArrayList<TQuestion>();
+		try {
+			File file = new File(Load.class.getResource("/sources/questions/T/"+lvl+".txt").getFile());
+			FileReader reader = new FileReader(file);
+			BufferedReader br = new BufferedReader(reader);
+			
+			for(int i = 1; i<=3; i++) {
+				int answerId = 0;
+				ArrayList<Option> options = new ArrayList<Option>();
+				String question = br.readLine();
+				
+				for(int j=1; j<=4; j++) {
+					String op = br.readLine();
+					if(op.startsWith("*")) {
+						answerId = j; 
+						String opc = op.replace("*", "");
+						options.add(new Option(j, opc));
+					}else {
+						options.add(new Option(j, op));
+					}
+				}
+				TQuestion Tq = new TQuestion(i, lvl, question,options, answerId);
+				tQuestions.add(Tq);
+				
+				br.readLine(); //Linea de espacio entre preguntas
+			}
+			reader.close();
+			br.close();
+		}catch(Exception e) {
+			System.out.println("Error tratando de cargar las preguntas teoricas"+e);
+		}
+	
+		return tQuestions;
 	}
 	
 	public static ArrayList<Enemie> initEnemies() {
@@ -50,7 +113,6 @@ public abstract class Load {
 			enemies.add(enemie);
 		}
 		return enemies;
-		
 	}
 	
 	public static Player initPlayer() {
