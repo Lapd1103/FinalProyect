@@ -37,10 +37,10 @@ public class window extends JFrame {
 	 */
 	public static void main(String[] args) {
 		
-		ArrayList<TQuestion> questions = Load.initTQuestions(1); 
+		/*ArrayList<TQuestion> questions = Load.initTQuestions(1); 
 		questions.forEach(System.out::println);
-		
-		/*EventQueue.invokeLater(new Runnable() {
+		*/
+		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					window frame = new window();
@@ -49,7 +49,7 @@ public class window extends JFrame {
 					e.printStackTrace();
 				}
 			}
-		});*/
+		});
 	}
 
 	/**
