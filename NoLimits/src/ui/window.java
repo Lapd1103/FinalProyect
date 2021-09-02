@@ -1,21 +1,16 @@
 package ui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Image;
-import java.awt.Label;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
-import data.CQuestion;
 import data.Enemie;
 import data.Level;
 import data.PDFSources;
 import data.Player;
 import data.Question;
-import data.TQuestion;
 import logic.GameEngine;
 import logic.Load;
 import logic.ManagePDF;
@@ -35,22 +30,6 @@ public class window extends JFrame {
 	private JPanel contentPane;
 	private int widht = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 	private int height = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					window frame = new window();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -94,7 +73,7 @@ public class window extends JFrame {
 		 * Botones para cambiar de pestañas
 		 */
 		// Inicio --> Aventura
-		JButton btnGLvls = new JButton("Aventura");
+		JButton btnGLvls = new JButton(new ImageIcon("src/sources/icons/aventure.gif"));
 		btnGLvls.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -102,7 +81,7 @@ public class window extends JFrame {
 				PLvls.setVisible(true);
 			}
 		});
-		btnGLvls.setBounds(272, 215, 89, 23);
+		btnGLvls.setBounds(272, 215, 198, 185);
 		PStart.add(btnGLvls);
 
 		// Aventura --> Inicio
@@ -117,47 +96,43 @@ public class window extends JFrame {
 		lblBackA.setIcon(new ImageIcon(window.class.getResource("/sources/icons/arrow.png")));
 		lblBackA.setBounds(30, 35, 61, 64);
 		PLvls.add(lblBackA);
+
+		
+		// initializePLvl(PLvl);
+
+		// Setting up of PDFViewer instance
+
+		ButtonNBPDF nextBtn = new ButtonNBPDF("up.png");
+		ButtonNBPDF beforeBtn = new ButtonNBPDF("down.png");
+		PDFViewer generalPDFView = new PDFViewer(this, nextBtn, beforeBtn, this.widht, this.height);
+		PDFSources sourcesPDF = new PDFSources();
+		JLabel homeLabel = generalPDFView.getHomeLabel();
+		ManagePDF.addDataEventsNext(nextBtn, sourcesPDF, generalPDFView.getController());
+		ManagePDF.addDataEventsBefore(beforeBtn, sourcesPDF, generalPDFView.getController());
+		ManagePDF.addEventHomeLabel(PStart, generalPDFView, homeLabel);
+		// Principal Screen -> PDFViewer Screen
+		JButton btnPDFViewer = new JButton(new ImageIcon("src/sources/icons/teoric.gif"));
+		btnPDFViewer.addActionListener(e -> {
+			PStart.setVisible(false);
+			generalPDFView.setVisible(true);
+			generalPDFView.getController().openDocument("src/sources/PDFs/1.Principios de POO.pdf");
+			generalPDFView.getController().setZoom(2.24f);
+			ButtonNBPDF.pointerPDF = 0;
+			System.out.println("Inside ActionListener of btnPDFViewer");
+		});
+		btnPDFViewer.setBounds(500, 215,120, 168);
+		PStart.add(btnPDFViewer);
 		
 		/**
 		 * Inicializacion de las pestañas
 		 */
 		initializePStart(PStart);
 		initializePLvls(PLvls, PLvl);
-		//initializePLvl(PLvl);
-		
-		//Preparación del objeto PDFViewer
-				ImageIcon upArrow = new ImageIcon("src/sources/icons/up.png");
-				Image resizedUpArrow = upArrow.getImage();
-				resizedUpArrow = resizedUpArrow.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-				ImageIcon finalUpArrow = new ImageIcon(resizedUpArrow);
-				
-				ImageIcon downArrow = new ImageIcon("src/sources/icons/down.png");
-				Image resizedDownArrow = downArrow.getImage();
-				resizedDownArrow = resizedDownArrow.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-				ImageIcon finalDownArrow = new ImageIcon(resizedDownArrow);
-				ButtonNBPDF next = new ButtonNBPDF(finalUpArrow,0,0,0);
-				PDFViewer temp = new PDFViewer(this,next,
-						new ButtonNBPDF(finalDownArrow,0,80,0),
-						this.widht,this.height);
-				PDFSources so = new PDFSources();
-				ManagePDF.addDataEventsNext(next, new PDFSources(), temp.getController());
-				// Inicio -> PDFViewer
-				JButton btnPDFViewer = new JButton("Teoría");
-				
-				btnPDFViewer.addActionListener(e -> {
-						PStart.setVisible(false);
-						temp.setVisible(true);
-						temp.getController().openDocument("src/sources/pdfs/1.Principios de POO.pdf");
-						System.err.println("www");
-				}
-				);
-				btnPDFViewer.setBounds(0, 215, 89, 23);
-				PStart.add(btnPDFViewer);
 	}
 
 	private void initializePStart(JPanel PStart) {
 		String lvl = GameEngine.loadLevelPlayer();
-			
+
 		JLabel lblFondo = new JLabel("");
 		lblFondo.setIcon(Load.loadImg("/backgrounds/levels/" + lvl + ".jpg"));
 		lblFondo.setBounds(0, -20, widht, height);
@@ -165,24 +140,25 @@ public class window extends JFrame {
 	}
 
 	private void initializePLvls(JPanel PLvls, JPanel PLvl) {
-		
+
 		ArrayList<Level> levels = Load.initLvls();
-		
+
 		Load.loadIconsLvls(PLvls, PLvl, levels);
-		
+
 		JLabel lblFondo = new JLabel("");
 		lblFondo.setIcon(Load.loadImg("/backgrounds/w_levels.jpg"));
 		lblFondo.setBounds(0, -20, widht, height);
 		PLvls.add(lblFondo);
 
 	}
-		
-	public static void initializePlvl(JPanel PLvls, JPanel PLvl, ImageIcon bg, Enemie enemie, Player player, ArrayList<Question> questions) {
+
+	public static void initializePlvl(JPanel PLvls, JPanel PLvl, ImageIcon bg, Enemie enemie, Player player,
+			ArrayList<Question> questions) {
 		PLvl.removeAll();
 		PLvl.repaint();
-		
+
 		/**
-		 *Boton de regreso 
+		 * Boton de regreso
 		 */
 		JLabel lblBackN = new JLabel();
 		lblBackN.addMouseListener(new MouseAdapter() {
@@ -195,7 +171,7 @@ public class window extends JFrame {
 		lblBackN.setIcon(new ImageIcon(window.class.getResource("/sources/icons/arrow.png")));
 		lblBackN.setBounds(30, 35, 61, 64);
 		PLvl.add(lblBackN);
-		
+
 		/**
 		 * Preguntas
 		 */
@@ -204,9 +180,9 @@ public class window extends JFrame {
 		boxQuestion.setBounds(0, 528, 1366, 200);
 		boxQuestion.setOpaque(true);
 		PLvl.add(boxQuestion);
-		
+
 		questions.get(4).showQuestion(boxQuestion);
-		
+
 		/**
 		 * Jugador
 		 */
@@ -215,7 +191,7 @@ public class window extends JFrame {
 		lblPlayer.setBounds(300, 220, player.getImg().getIconWidth(), player.getImg().getIconHeight());
 		PLvl.add(lblPlayer);
 		showLife(PLvl, player.getLife(), 400, 220);
-		
+
 		/**
 		 * Enemigo
 		 */
@@ -224,16 +200,17 @@ public class window extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int liveA = enemie.getLife();
-				enemie.setLife(liveA-20);
+				enemie.setLife(liveA - 20);
 				initializePlvl(PLvls, PLvl, bg, enemie, player, questions);
-				
+
 			}
 		});
 		lblEnemie.setIcon(enemie.getImg());
-		lblEnemie.setBounds(enemie.getPosX(), enemie.getPosY(), enemie.getImg().getIconWidth(), enemie.getImg().getIconHeight());
+		lblEnemie.setBounds(enemie.getPosX(), enemie.getPosY(), enemie.getImg().getIconWidth(),
+				enemie.getImg().getIconHeight());
 		PLvl.add(lblEnemie);
-		showLife(PLvl, enemie.getLife(), enemie.getPosX()+(enemie.getImg().getIconWidth()/2), enemie.getPosY());
-		
+		showLife(PLvl, enemie.getLife(), enemie.getPosX() + (enemie.getImg().getIconWidth() / 2), enemie.getPosY());
+
 		/**
 		 * Fondo
 		 */
@@ -242,19 +219,19 @@ public class window extends JFrame {
 		lblFondo.setBounds(0, -20, 1366, 728);
 		PLvl.add(lblFondo);
 	}
-	
+
 	private static void showLife(JPanel panel, int life, int posX, int posY) {
-	
+
 		JLabel lblLife = new JLabel();
 		lblLife.setBackground(Color.GRAY);
-		lblLife.setBounds(posX-140, posY-60, life, 30);
+		lblLife.setBounds(posX - 140, posY - 60, life, 30);
 		lblLife.setOpaque(true);
 		panel.add(lblLife);
-		
+
 		JLabel cLife = new JLabel();
 		cLife.setIcon(Load.loadImg("/icons/life.png"));
-		cLife.setBounds(posX-150, posY-90, 330, 70);
+		cLife.setBounds(posX - 150, posY - 90, 330, 70);
 		panel.add(cLife);
 	}
-	
+
 }

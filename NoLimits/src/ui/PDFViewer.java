@@ -1,30 +1,40 @@
 package ui;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.Color;
+import java.awt.Image;
 
-import javax.swing.JButton;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.icepdf.ri.common.SwingController;
 import org.icepdf.ri.common.SwingViewBuilder;
-//This is the panel where the pdf viewer is located and the buttons
+
+/**
+ * 
+ * @author heathens
+ * This class is a principal frame that contains a pdf viewer and a slider 
+ * section
+ *
+ */
+
 public class PDFViewer extends JPanel{
 	
-	JPanel pdfContainer, buttonsContainer;
-	SwingController controller;
-	ButtonNBPDF next, before;
+	private JPanel pdfContainer, buttonsContainer;
+	private SwingController controller;
+	private ButtonNBPDF next, before;
+	private JLabel home;
 	
 	public PDFViewer(JFrame root, ButtonNBPDF next, ButtonNBPDF before
 			,int width, int height) {
-		super();
+		super(new BorderLayout(10, 10));
 		this.setBounds(0,0,width, height);
-		this.setLayout(new BorderLayout(10, 10));
+		
+		//An instance of SwingController to manage pdfViewer
 		this.controller = new SwingController();
-		root.add(this);
-
+		
 		// Build a SwingViewFactory configured with the controller
 		SwingViewBuilder factory = new SwingViewBuilder(this.controller);
 
@@ -32,19 +42,35 @@ public class PDFViewer extends JPanel{
 		//with a complete, active Viewer UI.
 		this.pdfContainer = factory.buildViewerPanel();
 		this.add(this.pdfContainer, BorderLayout.CENTER);
-		this.next = next;
-		this.buttonsContainer = new JPanel();
-		this.before = before;
-		this.buttonsContainer.add(before);
-		this.buttonsContainer.add(next);
 		
+		//Create and set up slider frame
+		this.buttonsContainer = new JPanel();
+		this.buttonsContainer.setBackground(new Color(173,216,230));
+		this.next = next;
+		this.before = before;
+		this.buttonsContainer.add(this.before);
+		this.setUpHomeButton();
+		this.buttonsContainer.add(this.home);
+		this.buttonsContainer.add(this.next);
 		this.add(buttonsContainer,BorderLayout.SOUTH);
-	
-		//this.controller.openDocument("src/sources/pdfs/3.Herencia.pdf");
-		this.controller.setZoom(2.51f);
+		this.setVisible(false);
+		
+		root.add(this);
 	}
 	
 	public SwingController getController() {
 		return this.controller;
+	}
+	
+	public JLabel getHomeLabel() {
+		return this.home;
+	}
+	
+	private void setUpHomeButton() {
+		this.home = new JLabel();
+		ImageIcon iconButton = new ImageIcon("src/sources/icons/home.png");
+		Image resizedIcon = iconButton.getImage();
+		resizedIcon = resizedIcon.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+		this.home.setIcon(new ImageIcon(resizedIcon));
 	}
 }
