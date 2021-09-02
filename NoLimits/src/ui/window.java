@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.JFrame;
@@ -16,6 +17,8 @@ import logic.Load;
 import logic.ManagePDF;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.SystemColor;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
@@ -72,8 +75,13 @@ public class window extends JFrame {
 		/**
 		 * Botones para cambiar de pestañas
 		 */
+		
+		//Font for buttons
+		Font labelFont = new Font(Font.MONOSPACED, Font.BOLD, 30);
 		// Inicio --> Aventura
-		JButton btnGLvls = new JButton(new ImageIcon("src/sources/icons/aventure.gif"));
+		JLabel btnGLvls = new JLabel("> Modo Aventura");
+		btnGLvls.setFont(labelFont);
+		btnGLvls.setForeground(Color.white);
 		btnGLvls.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -81,7 +89,7 @@ public class window extends JFrame {
 				PLvls.setVisible(true);
 			}
 		});
-		btnGLvls.setBounds(272, 215, 198, 185);
+		btnGLvls.setBounds(870, 290, 400, 125);
 		PStart.add(btnGLvls);
 
 		// Aventura --> Inicio
@@ -97,7 +105,6 @@ public class window extends JFrame {
 		lblBackA.setBounds(30, 35, 61, 64);
 		PLvls.add(lblBackA);
 
-		
 		// initializePLvl(PLvl);
 
 		// Setting up of PDFViewer instance
@@ -111,18 +118,42 @@ public class window extends JFrame {
 		ManagePDF.addDataEventsBefore(beforeBtn, sourcesPDF, generalPDFView.getController());
 		ManagePDF.addEventHomeLabel(PStart, generalPDFView, homeLabel);
 		// Principal Screen -> PDFViewer Screen
-		JButton btnPDFViewer = new JButton(new ImageIcon("src/sources/icons/teoric.gif"));
-		btnPDFViewer.addActionListener(e -> {
-			PStart.setVisible(false);
-			generalPDFView.setVisible(true);
-			generalPDFView.getController().openDocument("src/sources/PDFs/1.Principios de POO.pdf");
-			generalPDFView.getController().setZoom(2.24f);
-			ButtonNBPDF.pointerPDF = 0;
-			System.out.println("Inside ActionListener of btnPDFViewer");
+		JLabel btnPDFViewer = new JLabel("> Modo Repaso");
+		btnPDFViewer.setFont(labelFont);
+		btnPDFViewer.setForeground(Color.white);
+		btnPDFViewer.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PStart.setVisible(false);
+				generalPDFView.setVisible(true);
+				generalPDFView.getController().openDocument("src/sources/PDFs/1.Principios de POO.pdf");
+				generalPDFView.getController().setZoom(2.24f);
+				ButtonNBPDF.pointerPDF = 0;
+				System.out.println("Inside ActionListener of btnPDFViewer");
+			};
+
 		});
-		btnPDFViewer.setBounds(500, 215,120, 168);
+		btnPDFViewer.setBounds(870, 375, 400, 125);
 		PStart.add(btnPDFViewer);
 		
+		//JOptionPane(credits)
+		JLabel btnCredits = new JLabel("> Créditos");
+		btnCredits.setFont(labelFont);
+		btnCredits.setForeground(Color.white);
+		btnCredits.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, "Proyecto para aprender las bases de Programación Orientada"
+						+ " a Objetos\nCreado por: Laura Paez, David Rativa, Ivan Rojas\n"
+						+ "Universidad Nacional de Colombia @ 2021", 
+						"NoLimits", JOptionPane.INFORMATION_MESSAGE,
+						new ImageIcon("src/sources/icons/game.png"));
+			};
+
+		});
+		btnCredits.setBounds(870, 445, 400, 125);
+		PStart.add(btnCredits);
+
 		/**
 		 * Inicializacion de las pestañas
 		 */

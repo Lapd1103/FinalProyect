@@ -45,7 +45,7 @@ public class PDFViewer extends JPanel{
 		
 		//Create and set up slider frame
 		this.buttonsContainer = new JPanel();
-		this.buttonsContainer.setBackground(new Color(173,216,230));
+		this.buttonsContainer.setBackground(new Color(230,230,230));
 		this.next = next;
 		this.before = before;
 		this.buttonsContainer.add(this.before);

@@ -27,6 +27,6 @@ public class ButtonNBPDF extends JButton{
 		this.setIcon(new ImageIcon(resizedIcon));
 		
 		this.setBorder(new EmptyBorder(0, 0, 0, 0));
-		this.setBackground(new Color(173,216,230));
+		this.setBackground(new Color(230,230,230));
 	}
 }
