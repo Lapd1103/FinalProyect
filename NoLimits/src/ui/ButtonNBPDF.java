@@ -8,7 +8,8 @@ import javax.swing.JButton;
  * pdf file
  */
 public class ButtonNBPDF extends JButton{
-	private int pointerPDF;
+	
+	public static int pointerPDF;
 	public ButtonNBPDF(Icon icon, int x, int y, int pointer) {
 		super(icon);
 	}

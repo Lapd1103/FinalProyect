@@ -12,11 +12,13 @@ import javax.swing.border.EmptyBorder;
 import data.CQuestion;
 import data.Enemie;
 import data.Level;
+import data.PDFSources;
 import data.Player;
 import data.Question;
 import data.TQuestion;
 import logic.GameEngine;
 import logic.Load;
+import logic.ManagePDF;
 
 import javax.swing.JLabel;
 import java.awt.SystemColor;
@@ -122,6 +124,35 @@ public class window extends JFrame {
 		initializePStart(PStart);
 		initializePLvls(PLvls, PLvl);
 		//initializePLvl(PLvl);
+		
+		//Preparación del objeto PDFViewer
+				ImageIcon upArrow = new ImageIcon("src/sources/icons/up.png");
+				Image resizedUpArrow = upArrow.getImage();
+				resizedUpArrow = resizedUpArrow.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+				ImageIcon finalUpArrow = new ImageIcon(resizedUpArrow);
+				
+				ImageIcon downArrow = new ImageIcon("src/sources/icons/down.png");
+				Image resizedDownArrow = downArrow.getImage();
+				resizedDownArrow = resizedDownArrow.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+				ImageIcon finalDownArrow = new ImageIcon(resizedDownArrow);
+				ButtonNBPDF next = new ButtonNBPDF(finalUpArrow,0,0,0);
+				PDFViewer temp = new PDFViewer(this,next,
+						new ButtonNBPDF(finalDownArrow,0,80,0),
+						this.widht,this.height);
+				PDFSources so = new PDFSources();
+				ManagePDF.addDataEventsNext(next, new PDFSources(), temp.getController());
+				// Inicio -> PDFViewer
+				JButton btnPDFViewer = new JButton("Teoría");
+				
+				btnPDFViewer.addActionListener(e -> {
+						PStart.setVisible(false);
+						temp.setVisible(true);
+						temp.getController().openDocument("src/sources/pdfs/1.Principios de POO.pdf");
+						System.err.println("www");
+				}
+				);
+				btnPDFViewer.setBounds(0, 215, 89, 23);
+				PStart.add(btnPDFViewer);
 	}
 
 	private void initializePStart(JPanel PStart) {
