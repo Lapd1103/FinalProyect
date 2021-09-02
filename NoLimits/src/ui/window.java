@@ -151,7 +151,7 @@ public class window extends JFrame {
 			};
 
 		});
-		btnCredits.setBounds(870, 445, 400, 125);
+		btnCredits.setBounds(870, 460, 400, 125);
 		PStart.add(btnCredits);
 
 		/**
