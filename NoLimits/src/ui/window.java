@@ -174,7 +174,7 @@ public class window extends JFrame {
 		boxQuestion.setOpaque(true);
 		PLvl.add(boxQuestion);
 		
-		questions.get(2).showQuestion(boxQuestion);
+		questions.get(4).showQuestion(boxQuestion);
 		
 		/**
 		 * Jugador

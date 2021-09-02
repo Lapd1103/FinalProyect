@@ -1,7 +1,12 @@
 package data;
 
+import java.awt.Font;
+
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class CQuestion extends Question {
 
@@ -39,5 +44,27 @@ public class CQuestion extends Question {
 	@Override
 	public void showQuestion(JLabel boxQuestion) {
 		
+		JLabel lblText = new JLabel("Complete el código de la imagen:");
+		lblText.setHorizontalAlignment(SwingConstants.LEFT);
+		lblText.setFont(new Font("Txt_IV50", Font.PLAIN, 24));
+		lblText.setVerticalAlignment(SwingConstants.CENTER);
+		lblText.setBounds(10, 15, 893, 50);
+		boxQuestion.add(lblText);
+		
+		JLabel question = new JLabel("");
+		question.setIcon(this.getQuestionImg());
+		question.setBounds(663, 10, this.getQuestionImg().getIconWidth(), this.getQuestionImg().getIconHeight());
+		boxQuestion.add(question);
+		
+		JTextField answertxt = new JTextField("");
+		answertxt.setFont(new Font("Txt_IV50", Font.PLAIN, 20));
+		answertxt.setBounds(90, 70, 185, 40);
+		answertxt.setColumns(10);
+		boxQuestion.add(answertxt);
+		
+		JButton btnSend = new JButton("Enviar");
+		btnSend.setFont(new Font("Txt_IV50", Font.PLAIN, 16));
+		btnSend.setBounds(290, 70, 100, 40);
+		boxQuestion.add(btnSend);
 	}
 }
