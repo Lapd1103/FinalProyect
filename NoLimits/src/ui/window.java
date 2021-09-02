@@ -9,9 +9,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import data.CQuestion;
 import data.Enemie;
 import data.Level;
 import data.Player;
+import data.Question;
 import data.TQuestion;
 import logic.GameEngine;
 import logic.Load;
@@ -36,10 +38,6 @@ public class window extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		
-		/*ArrayList<TQuestion> questions = Load.initTQuestions(1); 
-		questions.forEach(System.out::println);
-		*/
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -118,11 +116,6 @@ public class window extends JFrame {
 		lblBackA.setBounds(30, 35, 61, 64);
 		PLvls.add(lblBackA);
 		
-		// Aventura -->Nivel
-		
-		// Nivel --> Aventura
-		
-		
 		/**
 		 * Inicializacion de las pestañas
 		 */
@@ -133,7 +126,7 @@ public class window extends JFrame {
 
 	private void initializePStart(JPanel PStart) {
 		String lvl = GameEngine.loadLevelPlayer();
-		
+			
 		JLabel lblFondo = new JLabel("");
 		lblFondo.setIcon(Load.loadImg("/backgrounds/levels/" + lvl + ".jpg"));
 		lblFondo.setBounds(0, -20, widht, height);
@@ -153,10 +146,13 @@ public class window extends JFrame {
 
 	}
 		
-	public static void initializePlvl(JPanel PLvls, JPanel PLvl, ImageIcon bg, Enemie enemie, Player player) {
+	public static void initializePlvl(JPanel PLvls, JPanel PLvl, ImageIcon bg, Enemie enemie, Player player, ArrayList<Question> questions) {
 		PLvl.removeAll();
 		PLvl.repaint();
 		
+		/**
+		 *Boton de regreso 
+		 */
 		JLabel lblBackN = new JLabel();
 		lblBackN.addMouseListener(new MouseAdapter() {
 			@Override
@@ -169,20 +165,36 @@ public class window extends JFrame {
 		lblBackN.setBounds(30, 35, 61, 64);
 		PLvl.add(lblBackN);
 		
+		/**
+		 * Preguntas
+		 */
+		JLabel boxQuestion = new JLabel();
+		boxQuestion.setBackground(Color.WHITE);
+		boxQuestion.setBounds(0, 528, 1366, 200);
+		boxQuestion.setOpaque(true);
+		PLvl.add(boxQuestion);
 		
+		questions.get(2).showQuestion(boxQuestion);
+		
+		/**
+		 * Jugador
+		 */
 		JLabel lblPlayer = new JLabel("");
 		lblPlayer.setIcon(player.getImg());
-		lblPlayer.setBounds(300, 300, player.getImg().getIconWidth(), player.getImg().getIconHeight());
+		lblPlayer.setBounds(300, 220, player.getImg().getIconWidth(), player.getImg().getIconHeight());
 		PLvl.add(lblPlayer);
-		showLife(PLvl, player.getLife(), 400, 300);
+		showLife(PLvl, player.getLife(), 400, 220);
 		
+		/**
+		 * Enemigo
+		 */
 		JLabel lblEnemie = new JLabel("");
 		lblEnemie.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int liveA = enemie.getLife();
 				enemie.setLife(liveA-20);
-				initializePlvl(PLvls, PLvl, bg, enemie, player);
+				initializePlvl(PLvls, PLvl, bg, enemie, player, questions);
 				
 			}
 		});
@@ -191,6 +203,9 @@ public class window extends JFrame {
 		PLvl.add(lblEnemie);
 		showLife(PLvl, enemie.getLife(), enemie.getPosX()+(enemie.getImg().getIconWidth()/2), enemie.getPosY());
 		
+		/**
+		 * Fondo
+		 */
 		JLabel lblFondo = new JLabel("");
 		lblFondo.setIcon(bg);
 		lblFondo.setBounds(0, -20, 1366, 728);

@@ -1,6 +1,7 @@
 package data;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 public class CQuestion extends Question {
 
@@ -32,5 +33,11 @@ public class CQuestion extends Question {
 	
 	public void setRightAnswer(String rightAnswer) {
 		this.rightAnswer = rightAnswer;
+	}
+	
+	//-----Otros métodos------
+	@Override
+	public void showQuestion(JLabel boxQuestion) {
+		
 	}
 }

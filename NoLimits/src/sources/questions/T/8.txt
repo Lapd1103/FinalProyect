@@ -1,0 +1,17 @@
+<html>¿Cuál es la principal ventaja de trabajar con programación multihilo?</html>
+<html>Evitar la aparición de errores de codificación</html>
+<html>Usar la clase Thread</html>
+*<html>Acortar el tiempo de ejecución de un programa</html>
+<html>Todas las anteriores</html>
+
+<html>¿Como usualmente se les llama a los procesos que se corren al mismo tiempo?</html>
+*<html>Hilos</html>
+<html>Multihilos</html>
+<html>Hileras</html>
+<html>Hielito</html>
+
+<html>¿De qué formas se puede implementar la programación multihilo?</html>
+<html>Herencia de Runnable</html>
+<html>Implementación de Thread</html>
+<html>Importando la librería Sys</html>
+*<html>Ninguna de las anteriores</html>

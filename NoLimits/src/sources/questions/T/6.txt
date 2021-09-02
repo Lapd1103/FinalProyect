@@ -1,0 +1,17 @@
+<html>¿A qué elemento básico se asemejan las colecciones?</html>
+<html>Double List</html>
+<html>Strings</html>
+<html>Char</html>
+*<html>Arrays</html>
+
+<html>¿Cuáles son los principales tres elementos de las colecciones?</html>
+*<html>Set - Map - List</html>
+<html>List - Array - Map</html>
+<html>TreeSet-ArrayList - TreeMap</html>
+<html>String - char - int</html>
+
+<html>¿Cuál es la principal característica de los Set?</html>
+<html>Ordena los elementos alfabéticamente</html>
+*<html>Evita elementos repetidos</html>
+<html>Almacena los objetos aleatoriamente</html>
+<html>Usa claves para guardar los objetos</html>

@@ -1,0 +1,17 @@
+<html>¿Qué ventajas aporta la herencia en la programación?</html>
+<html>Reutilizacion de codigo</html>
+<html>Optimización del programa</html>
+<html>No escribir tanto código</html>
+*<html>Todas las anteriores</html>
+
+<html>¿Qué elementos de la clase padre heredan las clases hijas?</html>
+*<html>Métodos y atributos</html>
+<html>Atributos</html>
+<html>Métodos</html>
+<html>Funciones</html>
+
+<html>¿Cuál es la palabra reservada para indicar que una clase hereda de otra?</html>
+<html>Implements</html>
+*<html>Extends</html>
+<html>Override</html>
+<html>Static</html>

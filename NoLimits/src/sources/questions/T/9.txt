@@ -1,0 +1,17 @@
+<html>Pregunta 1</html>
+*<html>Opcion1</html>
+<html>Opcion2</html>
+<html>Opcion3</html>
+<html>Opcion4</html>
+
+<html>Pregunta 2</html>
+*<html>Opcion1</html>
+<html>Opcion2</html>
+<html>Opcion3</html>
+<html>Opcion4</html>
+
+<html>Pregunta 3</html>
+*<html>Opcion1</html>
+<html>Opcion2</html>
+<html>Opcion3</html>
+<html>Opcion4</html>

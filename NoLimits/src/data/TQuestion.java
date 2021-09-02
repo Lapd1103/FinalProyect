@@ -1,6 +1,10 @@
 package data;
 
+import java.awt.Font;
 import java.util.ArrayList;
+
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class TQuestion extends Question{
 	private String question;
@@ -51,6 +55,17 @@ public class TQuestion extends Question{
 		return "Id: "+this.getId()+"\nLevel: "+this.getLevel()+"\nPregunta: "+this.question+"\noptions: "+this.getOptions()+"\n Respuesta correcta: "+this.getAnswerId();
 	}
 	
-	
+	//-----Otros métodos------
+	public void showQuestion(JLabel boxQuestion) {
+		JLabel lblQuestion = new JLabel(this.getQuestion());
+		lblQuestion.setFont(new Font("Txt_IV50", Font.PLAIN, 24));
+		lblQuestion.setVerticalAlignment(SwingConstants.CENTER);
+		lblQuestion.setBounds(10, 10, 1346, 50);
+		boxQuestion.add(lblQuestion);
+		
+		for(int i= 0; i<=3; i++) {
+			this.getOptions().get(i).showOption(boxQuestion);
+		}
+	}
 	
 }

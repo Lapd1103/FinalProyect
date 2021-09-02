@@ -29,31 +29,40 @@ public abstract class Load {
 		ArrayList<Level> levels = new ArrayList<Level>();
 		for(int i= 1; i<=9; i++) {
 			//cargar preguntas
-			//ArrayList<Question> questions = initQuestions(i);
+			ArrayList<Question> questions = initQuestions(i);
 			
 			// Cargan las imagenes de los fondos de los niveles
 			ImageIcon bg = loadImg("/backgrounds/levels/"+i+".jpg");
 			
 			//Instancia del nivel
-			Level level = new Level(i, bg, enemies.get(i-1), player);
+			Level level = new Level(i, bg, enemies.get(i-1), player, questions);
 			levels.add(level);
 		}
 		return levels;
 	}
 	
-	/*public static ArrayList<Question> initQuestions(int lvl) {
+	public static ArrayList<Question> initQuestions(int lvl) {
 		//Cargar preguntas teoricas
-		ArrayList<TQuestion> TQuestions = initTQuestions(lvl);
-	
-	}*/
+		ArrayList<TQuestion> tQuestions = initTQuestions(lvl);
+		ArrayList<CQuestion> cQuestions = initCQuestions(lvl);
+		
+		ArrayList<Question> questions = new ArrayList<Question>();
+		for(int i = 0; i<=2; i++) {
+			questions.add(tQuestions.get(i));
+		}
+		for(int i = 0; i<=1; i++) {
+			questions.add(cQuestions.get(i));
+		}
+		return questions;
+	}
 
-	public static ArrayList<CQuestion> initCQuestion(int lvl){
+	public static ArrayList<CQuestion> initCQuestions(int lvl){
 		ArrayList<CQuestion> cQuestions = new ArrayList<CQuestion>();
 		//Respuestas de preguntas teoricas
-		String ask[][] = {{"R11","R12"},{"R21","R22"},{"R31","R32"},{"R41","R42"},{"R51","R52"},{"R61","R62"},{"R71","R72"},{"R81","R82"},{"R91","R92"}};
+		String ask[][] = {{"public","new"},{"private","getNombre"},{"extends","super"},{"R41","R42"},{"R51","R52"},{"R61","R62"},{"R71","R72"},{"extends","implements"},{"R91","R92"}};
 		
 		for(int i = 1; i<=2; i++) {
-			CQuestion cquest = new CQuestion(i, lvl, loadImg("/questions/C/"+lvl+i+".png"), ask[lvl-1][i-1]);
+			CQuestion cquest = new CQuestion(i+3, lvl, loadImg("/questions/C/"+lvl+i+".png"), ask[lvl-1][i-1]);
 			cQuestions.add(cquest);
 		}
 		return cQuestions;
@@ -104,7 +113,7 @@ public abstract class Load {
 		}
 		
 		//Definir posicion predefinida de las imagenes de los enemigos 
-		int pos[][] = {{900,300},{800,230},{800,300},{800,300},{670,200},{770,240},{800,200},{700,270},{750,200}};
+		int pos[][] = {{900,220},{800,150},{800,220},{800,220},{670,165},{770,160},{800,120},{700,190},{750,120}};
 		
 		//Instanciar los enemigos
 		ArrayList<Enemie> enemies = new ArrayList<Enemie>();

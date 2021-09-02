@@ -45,7 +45,7 @@ public class Level {
 	
 	
 	public void openLvl(JPanel PLvls, JPanel PLvl) {
-		window.initializePlvl(PLvls, PLvl, this.getBg(), this.getEnemie(), this.getPlayer());
+		window.initializePlvl(PLvls, PLvl, this.getBg(), this.getEnemie(), this.getPlayer(), this.getQuestions());
 	}
 	
 	//------Constructors------

@@ -1,17 +1,17 @@
-Un ________ es la instanciación de una _________
-Objeto/Variable
-Encapsulamiento/Clase
-*Objeto/Clase
-Ninguna de las anteriores
+<html>Un ________ es la instanciación de una _________</html>
+<html>Objeto / Variable</html>
+<html>Encapsulamiento / Clase</html>
+*<html>Objeto / Clase</html>
+<html>Ninguna de las anteriores</html>
 
-¿Cuál de las siguientes opciones es un método?
-import.java.util
-int Suma
-*public static int Suma(int a, int b){}
-return “Suma”
+<html>¿Cuál de las siguientes opciones es un método?</html>
+<html>import.java.util</html>
+<html>int Suma</html>
+*<html>public static int Suma(int a, int b){}</html>
+<html>return “Suma”</html>
 
-¿Cuál es el punto de partida de un programa?
-*El método main
-La primera clase creada
-El primer método creado
-Ninguna de las anteriores
+<html>¿Cuál es el punto de partida de un programa?</html>
+*<html>El método main</html>
+<html>La primera clase creada</html>
+<html>El primer método creado</html>
+<html>Ninguna de las anteriores</html>

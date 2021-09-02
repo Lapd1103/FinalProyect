@@ -1,5 +1,6 @@
 package logic;
 
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,6 +10,18 @@ import java.io.PrintWriter;
 
 public abstract class GameEngine {
 
+	public static void openPDF() {
+		
+		File file = new File ("NoLimits/NoLimits/src/sources/PDFs/Herencia.pdf");
+		Desktop desktop = Desktop.getDesktop();
+		try {
+			desktop.open(file);
+			System.out.println("Abriendo PDF");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static String loadLevelPlayer() {
 		try {
 			File file = new File("lvl.txt");

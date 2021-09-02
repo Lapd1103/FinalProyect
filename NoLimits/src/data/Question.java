@@ -1,5 +1,7 @@
 package data;
 
+import javax.swing.JLabel;
+
 public abstract class Question {
 	private int id;
 	private int level;
@@ -27,4 +29,7 @@ public abstract class Question {
 	public void setLevel(int level) {
 		this.level = level;
 	}
+	
+	//-----Métodos abstractos------
+	public abstract void showQuestion(JLabel boxQuestion);
 }

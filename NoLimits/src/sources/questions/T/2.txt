@@ -1,17 +1,17 @@
-¿Cuáles son los niveles de protección permitidos en Java?
-Estático/Público/Privado
-*Protegido/Público/Privado
-Estándar/Privado/Protegido
-Encapsulado/Público/Privado
+<html>¿Cuáles son los niveles de protección permitidos en Java?</html>
+<html>Estático / Público / Privado</html>
+*<html>Protegido/Público / Privado</html>
+<html>Estándar/Privado / Protegido</html>
+<html>Encapsulado / Público / Privado</html>
 
-¿Qué nivel de protección tienen los atributos de una clase encapsulada?
-Público
-*Privado
-Protegido
-Indefinido
+<html>¿Qué nivel de protección tienen los atributos de una clase encapsulada?</html>
+<html>Público</html>
+*<html>Privado</html>
+<html>Protegido</html>
+<html>Indefinido</html>
 
-¿Comó se llaman los métodos que debo definir si encapsulo una clase?
-Constructor
-toString
-main
-*Getters y Setters
+<html>¿Comó se llaman los métodos que debo definir si encapsulo una clase?</html>
+<html>Constructor</html>
+<html>toString</html>
+<html>main</html>
+*<html>Getters y Setters</html>
