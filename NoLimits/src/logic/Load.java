@@ -59,7 +59,7 @@ public abstract class Load {
 	public static ArrayList<CQuestion> initCQuestions(int lvl){
 		ArrayList<CQuestion> cQuestions = new ArrayList<CQuestion>();
 		//Respuestas de preguntas teoricas
-		String ask[][] = {{"public","new"},{"private","getNombre"},{"extends","super"},{"R41","R42"},{"R51","R52"},{"R61","R62"},{"R71","R72"},{"extends","implements"},{"R91","R92"}};
+		String ask[][] = {{"public","new"},{"private","getNombre"},{"extends","super"},{"extends","interface"},{"abstract","static"},{"String","listaCompras"},{"JLabel","Font"},{"extends","implements"},{"try","Exception"}};
 		
 		for(int i = 1; i<=2; i++) {
 			CQuestion cquest = new CQuestion(i+3, lvl, loadImg("/questions/C/"+lvl+i+".png"), ask[lvl-1][i-1]);
