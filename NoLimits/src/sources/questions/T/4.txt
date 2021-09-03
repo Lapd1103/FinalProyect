@@ -1,17 +1,17 @@
-<html>Pregunta 1</html>
-*<html>Opcion1</html>
-<html>Opcion2</html>
-<html>Opcion3</html>
-<html>Opcion4</html>
+<html>¿Cuáles son las formas de lograr una abstracción en Java?</html>
+<html>Método Abstracto /Interfaz</html>
+<html>Método Abstracto /Abstracción</html>
+*<html>Clase Abstracta /Interfaz</html>
+<html>Clase Abstracta /Abstracción</html>
 
-<html>Pregunta 2</html>
-*<html>Opcion1</html>
-<html>Opcion2</html>
-<html>Opcion3</html>
-<html>Opcion4</html>
+<html>Una interfaz tiene la función de declarar una serie de ______ y _______ que deben ser implementados luego por una o más ______</html>
+*<html>Métodos /Propiedades/ Clases</html>
+<html>Instancias /Métodos /Clases</html>
+<html>Elementos /Propiedades /Instancias</html>
+<html>Métodos /Objetos /Instancias</html>
 
-<html>Pregunta 3</html>
-*<html>Opcion1</html>
-<html>Opcion2</html>
-<html>Opcion3</html>
-<html>Opcion4</html>
+<html>Una interfaz puede</html>
+<html>Extender otra clase e implementar la interfaz</html>
+<html>Tener variables estáticas, no estáticas, finales...</html>
+<html>Ninguna de las anteriores</html>
+*<html>Tener métodos abstractos</html>

@@ -1,17 +1,17 @@
-<html>Pregunta 1</html>
-*<html>Opcion1</html>
-<html>Opcion2</html>
-<html>Opcion3</html>
-<html>Opcion4</html>
+<html>¿Qué son excepciones?</html>
+<html>Limitaciones de un programa</html>
+<html>Funciones aplicadas a un programa</html>
+*<html>Un error de programa</html>
+<html>Un objeto</html>
 
-<html>Pregunta 2</html>
-*<html>Opcion1</html>
-<html>Opcion2</html>
-<html>Opcion3</html>
-<html>Opcion4</html>
+<html>Si se dispara una excepción en alguna de las instrucciones del bloque ___, la ejecución del programa pasa inmediatamente a las instrucciones del bloque ____</html>
+<html>C/Catch</html>
+<html>Try/Instancia</html>
+<html>Catch/Throws</html>
+*<html>Try/Catch</html>
 
-<html>Pregunta 3</html>
-*<html>Opcion1</html>
-<html>Opcion2</html>
-<html>Opcion3</html>
-<html>Opcion4</html>
+<html>La clase Exception es una clase de Java que ofrece múltiples servicios. ¿Cuáles son los más usados?</html>
+<html>getClass /getCatch</html>
+<html>getMessage /getSet</html>
+<html>getClass /printStackTrace</html>
+*<html>getMessage /printStackTrace</html>

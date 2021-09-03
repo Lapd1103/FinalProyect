@@ -1,17 +1,17 @@
-<html>Pregunta 1</html>
-*<html>Opcion1</html>
-<html>Opcion2</html>
-<html>Opcion3</html>
-<html>Opcion4</html>
+<html>¿Cómo se llama la extensión de Java utilizada para modelar una interfaz gráfica?</html>
+<html>Util</html>
+*<html>JFrame</html>
+<html>Eclipse</html>
+<html>Math</html>
 
-<html>Pregunta 2</html>
-*<html>Opcion1</html>
-<html>Opcion2</html>
-<html>Opcion3</html>
-<html>Opcion4</html>
+<html>Una interfaz gráfica es creada con el propósito de</html>
+<html>Crear una interfaz amigable del programa para el usuario</html>
+<html>Favorecer la creación de la lógica de negocio</html>
+<html>Implementar botones y ventanas</html>
+*<html>Todas las anteriores</html>
 
-<html>Pregunta 3</html>
-*<html>Opcion1</html>
-<html>Opcion2</html>
-<html>Opcion3</html>
-<html>Opcion4</html>
+<html>JWindow, JFrame, JPanel y JDialog son funciones también conocidas como</html>
+<html>Ventanas</html>
+<html>Instancias</html>
+*<html>Contenedores</html>
+<html>Clases</html>

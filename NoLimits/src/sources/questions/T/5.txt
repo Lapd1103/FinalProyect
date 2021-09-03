@@ -1,17 +1,17 @@
-<html>Pregunta 1</html>
-*<html>Opcion1</html>
-<html>Opcion2</html>
-<html>Opcion3</html>
-<html>Opcion4</html>
+<html>¿Qué es polimorfismo?</html>
+<html>Es un método que permite ejecutar varios programas</html>
+*<html>Respuesta de un objeto a una función segun los parámetros enviados</html>
+<html>Objeto con valores predeterminados en un programa</html>
+<html>Todas las anteriores</html>
 
-<html>Pregunta 2</html>
-*<html>Opcion1</html>
-<html>Opcion2</html>
-<html>Opcion3</html>
-<html>Opcion4</html>
+<html>Menciona los tipos de polimorfismos universales</html>
+<html>Inclusión /AdHoc /Sobrecarga</html>
+<html>Paramétrico /En fila /Coerción</html>
+<html>Inclusión/ Paramétrico /Coerción</html>
+*<html>Paramétrico /Inclusión /En fila</html>
 
-<html>Pregunta 3</html>
-*<html>Opcion1</html>
-<html>Opcion2</html>
-<html>Opcion3</html>
-<html>Opcion4</html>
+<html>¿En qué consiste el término “Sobrecarga”?</html>
+<html>Método aplicado en clases con el mismo nombre</html>
+*<html>Método aplicado con funciones mismo nombre, diferente firma</html>
+<html>Método para funciones con diferentes nombres e independientes</html>
+<html>Ninguna de las anteriores</html>
