@@ -3,7 +3,6 @@ package ui;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Image;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
