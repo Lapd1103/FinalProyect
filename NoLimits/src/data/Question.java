@@ -1,5 +1,8 @@
 package data;
 
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public abstract class Question {
@@ -31,5 +34,8 @@ public abstract class Question {
 	}
 	
 	//-----Métodos abstractos------
-	public abstract void showQuestion(JLabel boxQuestion);
+	public abstract void showQuestion(JLabel boxQuestion, ImageIcon bg, Enemie enemie, Player player, ArrayList<Question> questions, int iQues);
+
+	public abstract void rightAnswer(ImageIcon bg, Enemie enemie, Player player, ArrayList<Question> questions, String answer);
+	public abstract void rightAnswer(ImageIcon bg, Enemie enemie, Player player, ArrayList<Question> questions,int idOption);
 }

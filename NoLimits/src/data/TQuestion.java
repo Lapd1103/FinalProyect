@@ -3,8 +3,11 @@ package data;
 import java.awt.Font;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import ui.window;
 
 public class TQuestion extends Question{
 	private String question;
@@ -56,7 +59,7 @@ public class TQuestion extends Question{
 	}
 	
 	//-----Otros métodos------
-	public void showQuestion(JLabel boxQuestion) {
+	public void showQuestion(JLabel boxQuestion, ImageIcon bg, Enemie enemie, Player player,  ArrayList<Question> questions, int iQuest) {
 		JLabel lblQuestion = new JLabel(this.getQuestion());
 		lblQuestion.setFont(new Font("Txt_IV50", Font.PLAIN, 24));
 		lblQuestion.setVerticalAlignment(SwingConstants.CENTER);
@@ -64,8 +67,25 @@ public class TQuestion extends Question{
 		boxQuestion.add(lblQuestion);
 		
 		for(int i= 0; i<=3; i++) {
-			this.getOptions().get(i).showOption(boxQuestion);
+			this.getOptions().get(i).showOption(boxQuestion, bg, enemie, player,  questions, iQuest);
 		}
 	}
+	
+	public void rightAnswer(ImageIcon bg, Enemie enemie, Player player, ArrayList<Question> questions,int idOption) {
+		if(idOption == this.getAnswerId()) {
+			int vidaA = enemie.getLife();
+			enemie.setLife(vidaA-60);
+		}
+		else{
+			int vidaA = player.getLife();
+			player.setLife(vidaA-60);
+		}
+		
+		window.initializePlvl(bg, enemie, player, questions, this.getId());
+	}
+	
+	public void rightAnswer(ImageIcon bg, Enemie enemie, Player player, ArrayList<Question> questions, String answer) {
+		
+	};
 	
 }

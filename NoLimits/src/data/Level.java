@@ -28,6 +28,8 @@ public class Level {
 			public void mouseClicked(MouseEvent e) {
 				PLvls.setVisible(false);
 				PLvl.setVisible(true);
+				getPlayer().setLife(305);
+				getEnemie().setLife(305);
 				openLvl(PLvls, PLvl);
 			}
 		});
@@ -45,7 +47,7 @@ public class Level {
 	
 	
 	public void openLvl(JPanel PLvls, JPanel PLvl) {
-		window.initializePlvl(PLvls, PLvl, this.getBg(), this.getEnemie(), this.getPlayer(), this.getQuestions());
+		window.initializePlvl(this.getBg(), this.getEnemie(), this.getPlayer(), this.getQuestions(), 0);
 	}
 	
 	//------Constructors------

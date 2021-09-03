@@ -30,8 +30,11 @@ import java.awt.Toolkit;
 
 public class window extends JFrame {
 
-	private int widht = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-	private int height = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+	private static JPanel PStart;
+	private static JPanel PLvls;
+	private static JPanel PLvl;
+	private static int widht = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+	private static int height = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
 	
 	/**
 	 * Create the frame.
@@ -49,19 +52,19 @@ public class window extends JFrame {
 	 * Inicializa los paneles de la ventana
 	 */
 	private void initialize() {
-		JPanel PStart = new JPanel();
+		PStart = new JPanel();
 		PStart.setBackground(SystemColor.controlShadow);
 		PStart.setBounds(0, 0, widht, height);
 		PStart.setLayout(null);
 		PStart.setVisible(true);
 
-		JPanel PLvls = new JPanel();
+		PLvls = new JPanel();
 		PLvls.setBackground(Color.DARK_GRAY);
 		PLvls.setBounds(0, 0, widht, height);
 		PLvls.setLayout(null);
 		PLvls.setVisible(false);
 
-		JPanel PLvl = new JPanel();
+		PLvl = new JPanel();
 		PLvl.setBackground(Color.DARK_GRAY);
 		PLvl.setBounds(0, 0, widht, height);
 		PLvl.setLayout(null);
@@ -156,11 +159,12 @@ public class window extends JFrame {
 		/**
 		 * Inicializacion de las pestañas
 		 */
-		initializePStart(PStart);
-		initializePLvls(PLvls, PLvl);
+		initializePStart();
+		initializePLvls();
 	}
 
-	private void initializePStart(JPanel PStart) {
+	private static void initializePStart() {
+		
 		String lvl = GameEngine.loadLevelPlayer();
 
 		JLabel lblFondo = new JLabel("");
@@ -169,8 +173,10 @@ public class window extends JFrame {
 		PStart.add(lblFondo);
 	}
 
-	private void initializePLvls(JPanel PLvls, JPanel PLvl) {
-
+	private static void initializePLvls() {
+		PLvls.removeAll();
+		PLvls.repaint();
+		
 		ArrayList<Level> levels = Load.initLvls();
 
 		Load.loadIconsLvls(PLvls, PLvl, levels);
@@ -182,77 +188,115 @@ public class window extends JFrame {
 
 	}
 
-	public static void initializePlvl(JPanel PLvls, JPanel PLvl, ImageIcon bg, Enemie enemie, Player player,
-			ArrayList<Question> questions) {
+	public static void initializePlvl(ImageIcon bg, Enemie enemie, Player player,
+			ArrayList<Question> questions, int iQuestion) {
 		PLvl.removeAll();
 		PLvl.repaint();
 
-		/**
-		 * Boton de regreso
-		 */
-		JLabel lblBackN = new JLabel();
-		lblBackN.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				PLvl.setVisible(false);
-				PLvls.setVisible(true);
+		if(iQuestion != 5) {
+			/**
+			 * Boton de regreso
+			 */
+			JLabel lblBackN = new JLabel();
+			lblBackN.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					PLvl.setVisible(false);
+					PLvls.setVisible(true);
+				}
+			});
+			lblBackN.setIcon(new ImageIcon(window.class.getResource("/sources/icons/arrow.png")));
+			lblBackN.setBounds(30, 35, 61, 64);
+			PLvl.add(lblBackN);
+
+			/**
+			 * Preguntas
+			 */
+			JLabel boxQuestion = new JLabel();
+			boxQuestion.setBackground(Color.WHITE);
+			boxQuestion.setBounds(0, 528, 1366, 200);
+			boxQuestion.setOpaque(true);
+			PLvl.add(boxQuestion);
+
+			questions.get(iQuestion).showQuestion(boxQuestion, bg, enemie, player, questions, iQuestion);
+			
+			/**
+			 * Jugador
+			 */
+			JLabel lblPlayer = new JLabel("");
+			lblPlayer.setIcon(player.getImg());
+			lblPlayer.setBounds(300, 220, player.getImg().getIconWidth(), player.getImg().getIconHeight());
+			PLvl.add(lblPlayer);
+			showLife(PLvl, player.getLife(), 400, 220);
+
+			/**
+			 * Enemigo
+			 */
+			JLabel lblEnemie = new JLabel("");
+			lblEnemie.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+
+				}
+			});
+			lblEnemie.setIcon(enemie.getImg());
+			lblEnemie.setBounds(enemie.getPosX(), enemie.getPosY(), enemie.getImg().getIconWidth(),
+					enemie.getImg().getIconHeight());
+			PLvl.add(lblEnemie);
+			showLife(PLvl, enemie.getLife(), enemie.getPosX() + (enemie.getImg().getIconWidth() / 2), enemie.getPosY());
+
+			/**
+			 * Fondo
+			 */
+			JLabel lblFondo = new JLabel("");
+			lblFondo.setIcon(bg);
+			lblFondo.setBounds(0, -20, 1366, 728);
+			PLvl.add(lblFondo);
+		}else {
+			if(enemie.getLife() > player.getLife()) {
+				JLabel lblHome = new JLabel();
+				lblHome.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						PLvl.setVisible(false);
+						PStart.setVisible(true);
+					};
+
+				});
+				lblHome.setIcon(Load.loadImg("/icons/home_GO.png"));
+				lblHome.setBounds(634, 500, 128, 128);
+				PLvl.add(lblHome);
+				
+				JLabel lblGameOver = new JLabel();
+				lblGameOver.setIcon(Load.loadImg("/backgrounds/game_over.gif"));
+				lblGameOver.setBounds(0, -5, widht, height);
+				PLvl.add(lblGameOver);
 			}
-		});
-		lblBackN.setIcon(new ImageIcon(window.class.getResource("/sources/icons/arrow.png")));
-		lblBackN.setBounds(30, 35, 61, 64);
-		PLvl.add(lblBackN);
+			else {
+				JLabel lblHome = new JLabel();
+				lblHome.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						
+						//initializePStart();
+						//initializePLvls();
+						
+						PLvl.setVisible(false);
+						PStart.setVisible(true);
+					};
 
-		/**
-		 * Preguntas
-		 */
-		JLabel boxQuestion = new JLabel();
-		boxQuestion.setBackground(Color.WHITE);
-		boxQuestion.setBounds(0, 528, 1366, 200);
-		boxQuestion.setOpaque(true);
-		PLvl.add(boxQuestion);
-
-		//questions.get(4).showQuestion(boxQuestion);
-
-		/**
-		 * Jugador
-		 */
-		JLabel lblPlayer = new JLabel("");
-		lblPlayer.setIcon(player.getImg());
-		lblPlayer.setBounds(300, 220, player.getImg().getIconWidth(), player.getImg().getIconHeight());
-		PLvl.add(lblPlayer);
-		showLife(PLvl, player.getLife(), 400, 220);
-
-		/**
-		 * Enemigo
-		 */
-		JLabel lblEnemie = new JLabel("");
-		lblEnemie.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int liveA = enemie.getLife();
-				enemie.setLife(liveA - 20);
-				initializePlvl(PLvls, PLvl, bg, enemie, player, questions);
-
+				});
+				lblHome.setIcon(Load.loadImg("/icons/home_W.png"));
+				lblHome.setBounds(619, 20, 128, 128);
+				PLvl.add(lblHome);
+				
+				JLabel lblGameOver = new JLabel();
+				lblGameOver.setIcon(Load.loadImg("/backgrounds/winner.jpg"));
+				lblGameOver.setBounds(0, 0, widht, height);
+				PLvl.add(lblGameOver);
 			}
-		});
-		lblEnemie.setIcon(enemie.getImg());
-		lblEnemie.setBounds(enemie.getPosX(), enemie.getPosY(), enemie.getImg().getIconWidth(),
-				enemie.getImg().getIconHeight());
-		PLvl.add(lblEnemie);
-		showLife(PLvl, enemie.getLife(), enemie.getPosX() + (enemie.getImg().getIconWidth() / 2), enemie.getPosY());
-
-		/**
-		 * Fondo
-		 */
-		JLabel lblFondo = new JLabel("");
-		lblFondo.setIcon(bg);
-		lblFondo.setBounds(0, -20, 1366, 728);
-		PLvl.add(lblFondo);
-	}
-
-	public static void showQuestions(JLabel boxQuestion, ArrayList<Question> questions, int id) {
-		//En construccion 
-		//questions.get(id).showQuestion(boxQuestion, questions, id+1);
+		}
+		
 	}
 	
 	private static void showLife(JPanel panel, int life, int posX, int posY) {
