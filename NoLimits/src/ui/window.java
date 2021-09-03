@@ -144,7 +144,6 @@ public class window extends JFrame {
 		});
 		btnCredits.setBounds(870, 460, 400, 125);
 		PStart.add(btnCredits);
-		
 		/**
 		 * Inicializacion de las pestañas
 		 */
@@ -153,11 +152,9 @@ public class window extends JFrame {
 	}
 
 	private static void initializePStart() {
-		
-		String lvl = GameEngine.loadLevelPlayer();
 
 		JLabel lblFondo = new JLabel("");
-		lblFondo.setIcon(Load.loadImg("/backgrounds/levels/" + lvl + ".jpg"));
+		lblFondo.setIcon(Load.loadImg("/backgrounds/levels/9.jpg"));
 		lblFondo.setBounds(0, -20, widht, height);
 		PStart.add(lblFondo);
 	}
@@ -280,9 +277,8 @@ public class window extends JFrame {
 				lblHome.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						
-						//initializePStart();
-						//initializePLvls();
+						GameEngine.updateLvlFile(enemie.getId());
+						initializePLvls();
 						
 						PLvl.setVisible(false);
 						PStart.setVisible(true);

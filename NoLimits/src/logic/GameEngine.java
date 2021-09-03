@@ -38,6 +38,16 @@ public abstract class GameEngine {
 		}
 	}
 	
+	public static void updateLvlFile(int lvl) {
+		int lvlA =  Integer.parseInt(loadLevelPlayer());
+		if(lvlA != 9 && lvl <= lvlA) {
+			File file = new File("lvl.txt");
+			file.delete();
+			
+			writeFile(String.valueOf(lvl+1));
+		}
+	}
+	
 	public static void writeFile(String lvl) {
 		try {
 			File file = new File("lvl.txt");
