@@ -94,18 +94,7 @@ public class window extends JFrame {
 		btnGLvls.setBounds(870, 290, 400, 125);
 		PStart.add(btnGLvls);
 
-		// Aventura --> Inicio
-		JLabel lblBackA = new JLabel();
-		lblBackA.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				PLvls.setVisible(false);
-				PStart.setVisible(true);
-			}
-		});
-		lblBackA.setIcon(new ImageIcon(window.class.getResource("/sources/icons/arrow.png")));
-		lblBackA.setBounds(30, 35, 61, 64);
-		PLvls.add(lblBackA);
+		
 
 		// initializePLvl(PLvl);
 
@@ -155,7 +144,7 @@ public class window extends JFrame {
 		});
 		btnCredits.setBounds(870, 460, 400, 125);
 		PStart.add(btnCredits);
-
+		
 		/**
 		 * Inicializacion de las pestañas
 		 */
@@ -176,6 +165,20 @@ public class window extends JFrame {
 	private static void initializePLvls() {
 		PLvls.removeAll();
 		PLvls.repaint();
+		
+		//Boton de regreso Aventura --> Inicio
+		JLabel lblBackA = new JLabel();
+		lblBackA.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PLvls.setVisible(false);
+				PStart.setVisible(true);
+			}
+		});
+		lblBackA.setIcon(new ImageIcon(window.class.getResource("/sources/icons/arrow.png")));
+		lblBackA.setBounds(30, 35, 61, 64);
+		PLvls.add(lblBackA);
+		
 		
 		ArrayList<Level> levels = Load.initLvls();
 
