@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 
@@ -30,10 +31,9 @@ import java.awt.Toolkit;
 
 public class window extends JFrame {
 
-	private JPanel contentPane;
 	private int widht = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 	private int height = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-
+	
 	/**
 	 * Create the frame.
 	 */
@@ -212,7 +212,7 @@ public class window extends JFrame {
 		boxQuestion.setOpaque(true);
 		PLvl.add(boxQuestion);
 
-		questions.get(4).showQuestion(boxQuestion);
+		//questions.get(4).showQuestion(boxQuestion);
 
 		/**
 		 * Jugador
@@ -251,6 +251,11 @@ public class window extends JFrame {
 		PLvl.add(lblFondo);
 	}
 
+	public static void showQuestions(JLabel boxQuestion, ArrayList<Question> questions, int id) {
+		//En construccion 
+		//questions.get(id).showQuestion(boxQuestion, questions, id+1);
+	}
+	
 	private static void showLife(JPanel panel, int life, int posX, int posY) {
 
 		JLabel lblLife = new JLabel();
