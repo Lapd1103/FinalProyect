@@ -1,8 +1,8 @@
 package logic;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -19,14 +19,17 @@ import ui.window;
 
 public abstract class Load {
 	
+	@SuppressWarnings("finally")
 	public static ArrayList<Level> initLvls(){
-		//Cargar enemigos
+		ArrayList<Level> levels = new ArrayList<Level>();
+		try {
+		//Cargar enemigos 
 		ArrayList<Enemie> enemies = initEnemies();
 		//Cargar jugador
 		Player player = initPlayer();
 		
 		//Instancia de los niveles
-		ArrayList<Level> levels = new ArrayList<Level>();
+		levels = new ArrayList<Level>();
 		for(int i= 1; i<=9; i++) {
 			//cargar preguntas
 			ArrayList<Question> questions = initQuestions(i);
@@ -39,14 +42,24 @@ public abstract class Load {
 			levels.add(level);
 		}
 		return levels;
+		}
+		catch(Exception e) {
+			
+		}
+		finally {
+			return levels;
+		}
 	}
 	
+	@SuppressWarnings("finally")
 	public static ArrayList<Question> initQuestions(int lvl) {
+		ArrayList<Question> questions = new ArrayList<Question>();
+		try {
 		//Cargar preguntas teoricas
 		ArrayList<TQuestion> tQuestions = initTQuestions(lvl);
 		ArrayList<CQuestion> cQuestions = initCQuestions(lvl);
 		
-		ArrayList<Question> questions = new ArrayList<Question>();
+		questions = new ArrayList<Question>();
 		for(int i = 0; i<=2; i++) {
 			questions.add(tQuestions.get(i));
 		}
@@ -54,6 +67,13 @@ public abstract class Load {
 			questions.add(cQuestions.get(i));
 		}
 		return questions;
+		}
+		catch(Exception e) {
+			
+		}
+		finally {
+			return questions;
+		}
 	}
 
 	public static ArrayList<CQuestion> initCQuestions(int lvl){
@@ -71,8 +91,8 @@ public abstract class Load {
 	public static ArrayList<TQuestion> initTQuestions(int lvl){
 		ArrayList<TQuestion> tQuestions = new ArrayList<TQuestion>();
 		try {
-			File file = new File(Load.class.getResource("/sources/questions/T/"+lvl+".txt").getFile());
-			FileReader reader = new FileReader(file);
+			InputStream file =  Load.class.getClassLoader().getResourceAsStream("sources/questions/T/"+lvl+".txt");
+			InputStreamReader reader = new java.io.InputStreamReader(file);
 			BufferedReader br = new BufferedReader(reader);
 			
 			for(int i = 1; i<=3; i++) {
@@ -99,6 +119,7 @@ public abstract class Load {
 			br.close();
 		}catch(Exception e) {
 			System.out.println("Error tratando de cargar las preguntas teoricas"+e);
+			System.out.println(e.getMessage() + e.getLocalizedMessage());
 		}
 	
 		return tQuestions;
@@ -125,7 +146,7 @@ public abstract class Load {
 	}
 	
 	public static Player initPlayer() {
-		//Cargar imagen del jugador
+		//Cargar imagen del jugador 
 		ImageIcon img_player = loadImg("/player/player.gif");
 		
 		Player player = new Player(img_player, 305);
@@ -133,7 +154,7 @@ public abstract class Load {
 	}
 	
 	public static ImageIcon loadImg(String link) {
-		ImageIcon img = new ImageIcon(window.class.getResource("/sources"+link));
+		ImageIcon img = new ImageIcon(window.class.getClassLoader().getResource("sources"+link));
 		return img;
 	}
 	

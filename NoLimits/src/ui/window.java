@@ -1,7 +1,6 @@
 package ui;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JFrame;
@@ -20,9 +19,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.SystemColor;
-import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -30,6 +29,11 @@ import java.awt.Toolkit;
 
 public class window extends JFrame {
 
+	/**
+	 * 
+	 */
+	private ClassLoader cl = this.getClass().getClassLoader();
+	private static final long serialVersionUID = 1L;
 	private static JPanel PStart;
 	private static JPanel PLvls;
 	private static JPanel PLvl;
@@ -40,12 +44,12 @@ public class window extends JFrame {
 	 * Create the frame.
 	 */
 	public window() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(window.class.getResource("/sources/icons/game.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(cl.getResource("sources/icons/game.png")));
 		setTitle("NoLimits");
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1366, 728);
-		initialize();
+		initialize(); 
 	}
 
 	/**
@@ -102,12 +106,13 @@ public class window extends JFrame {
 
 		ButtonNBPDF nextBtn = new ButtonNBPDF("up.png");
 		ButtonNBPDF beforeBtn = new ButtonNBPDF("down.png");
-		PDFViewer generalPDFView = new PDFViewer(this, nextBtn, beforeBtn, this.widht, this.height);
+		PDFViewer generalPDFView = new PDFViewer(this, nextBtn, beforeBtn, window.widht, window.height);
 		PDFSources sourcesPDF = new PDFSources();
 		JLabel homeLabel = generalPDFView.getHomeLabel();
 		ManagePDF.addDataEventsNext(nextBtn, sourcesPDF, generalPDFView.getController());
 		ManagePDF.addDataEventsBefore(beforeBtn, sourcesPDF, generalPDFView.getController());
 		ManagePDF.addEventHomeLabel(PStart, generalPDFView, homeLabel);
+		ManagePDF.addListenerJTree(generalPDFView.getTree(), generalPDFView.getController());
 		// Principal Screen -> PDFViewer Screen
 		JLabel btnPDFViewer = new JLabel("> Modo Repaso");
 		btnPDFViewer.setFont(labelFont);
@@ -117,7 +122,8 @@ public class window extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				PStart.setVisible(false);
 				generalPDFView.setVisible(true);
-				generalPDFView.getController().openDocument("src/sources/PDFs/1.Principios de POO.pdf");
+				URL path = cl.getResource("sources/PDFs/1.Principios de POO.pdf");
+				generalPDFView.getController().openDocument(path);
 				generalPDFView.getController().setZoom(2.24f);
 				ButtonNBPDF.pointerPDF = 0;
 				System.out.println("Inside ActionListener of btnPDFViewer");
@@ -138,7 +144,7 @@ public class window extends JFrame {
 						+ " a Objetos\nCreado por: Laura Paez, David Rativa, Ivan Rojas\n"
 						+ "Universidad Nacional de Colombia @ 2021", 
 						"NoLimits", JOptionPane.INFORMATION_MESSAGE,
-						new ImageIcon("src/sources/icons/game.png"));
+						new ImageIcon(cl.getResource("sources/icons/game.png")));
 			};
 
 		});

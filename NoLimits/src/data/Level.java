@@ -8,7 +8,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import logic.GameEngine;
 import logic.Load;
 import ui.window;
 
